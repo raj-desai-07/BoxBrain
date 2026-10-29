@@ -1,0 +1,218 @@
+<style>
+  /* ---------- Container ---------- */
+  .toast-container {
+    --red: #e5334d;
+    --green: #16a870;
+    --ease-soft: cubic-bezier(.2, .9, .25, 1.1);
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: min(380px, calc(100vw - 32px));
+    pointer-events: none;
+  }
+
+  /* ---------- Toast ---------- */
+  .toast-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 16px 19px 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05), 0 12px 32px -8px rgba(0, 0, 0, .16);
+    overflow: hidden;
+    pointer-events: auto;
+    animation: toast-in .55s var(--ease-soft) both;
+  }
+
+  .toast-card.hide {
+    animation: toast-out .45s cubic-bezier(.4, 0, .6, 1) forwards;
+    pointer-events: none;
+  }
+
+  /* green left edge */
+  .toast-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 5px;
+    background: var(--green);
+  }
+
+  /* ---------- Icon + single wave ---------- */
+  .toast-icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+  }
+
+  .toast-icon .wave {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--green);
+    opacity: 0;
+    animation: wave 2.2s ease-out .9s infinite;
+  }
+
+  .toast-icon .circle {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--green);
+    animation: icon-pop .6s var(--ease-soft) .3s both;
+  }
+
+  .toast-icon svg { width: 18px; height: 18px; }
+
+  .toast-icon .tick {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 18;
+    stroke-dashoffset: 18;
+    animation: draw .4s ease-out .7s forwards;
+  }
+
+  /* ---------- Text ---------- */
+  .toast-body { flex: 1; min-width: 0; }
+
+  .toast-title {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #1f2430;
+  }
+
+  .toast-message {
+    margin: 4px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #7b8190;
+  }
+
+  /* ---------- Close ---------- */
+  .toast-close {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #a3a8b4;
+    cursor: pointer;
+    transition: background .25s, color .25s;
+  }
+  .toast-close:hover { background: #f1f2f5; color: #444b5c; }
+  .toast-close svg { width: 12px; height: 12px; }
+
+  /* ---------- Bottom timer line ---------- */
+  .toast-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--green);
+    transform-origin: left center;
+    animation: progress var(--duration, 7000ms) linear .55s forwards;
+  }
+
+  /* ---------- Keyframes ---------- */
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateX(28px) scale(.97); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+  }
+
+  @keyframes toast-out {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to   { opacity: 0; transform: translateX(28px) scale(.97); }
+  }
+
+  @keyframes progress {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0); }
+  }
+
+  @keyframes wave {
+    0%   { transform: scale(1);    opacity: .35; }
+    100% { transform: scale(1.75); opacity: 0; }
+  }
+
+  @keyframes icon-pop {
+    from { transform: scale(0); }
+    to   { transform: scale(1); }
+  }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast-card, .toast-card .wave { animation-duration: .01s !important; }
+  }
+
+  @media (max-width: 480px) {
+    .toast-container { top: 12px; right: 16px; left: 16px; width: auto; }
+  }
+</style>
+
+<!-- ===== Toast (static HTML, message Django se aata hai) ===== -->
+<div class="toast-container" aria-live="polite">
+  <div class="toast-card" role="status" style="--duration: 7000ms">
+    <div class="toast-icon" aria-hidden="true">
+      <span class="wave"></span>
+      <div class="circle">
+        <svg viewBox="0 0 18 18">
+          <path class="tick" d="M4 9.5l3.5 3.5L14 5.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="toast-body">
+      <p class="toast-title">Success</p>
+      <p class="toast-message">{{ msg }}</p>
+    </div>
+    <button class="toast-close" type="button" aria-label="Close notification">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 2l10 10M12 2L2 12"/>
+      </svg>
+    </button>
+    <div class="toast-progress"></div>
+  </div>
+</div>
+
+<!-- sirf close button + auto-hide ke liye (message ka koi logic nahi) -->
+<script>
+  document.querySelectorAll('.toast-card:not([data-init])').forEach((toast) => {
+    toast.dataset.init = '1';
+    let closing = false;
+
+    function dismiss() {
+      if (closing) return;
+      closing = true;
+      toast.classList.add('hide');
+      toast.addEventListener('animationend', (e) => {
+        if (e.animationName === 'toast-out') toast.remove();
+      });
+    }
+
+    toast.querySelector('.toast-progress').addEventListener('animationend', dismiss);
+    toast.querySelector('.toast-close').addEventListener('click', dismiss);
+  });
+</script>

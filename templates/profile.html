@@ -1,0 +1,280 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile · BoxBrain AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body class="">
+    <main class="page">
+      <header class="top rise">
+        <a class="logo" href="{% url 'index' %}">
+          <svg viewBox="0 0 48 48">
+            <polygon points="24,3 44,14 24,25 4,14" fill="#ff9a52" />
+            <polygon points="4,14 24,25 24,47 4,36" fill="#ff6a00" />
+            <polygon points="44,14 24,25 24,47 44,36" fill="#e85d00" />
+          </svg>
+          <span>Box<b>Brain</b></span>
+        </a>
+
+        <div class="acts">
+          <a class="btn ghost sm" href="{% url 'index' %}">
+            <svg style="width:20px;height:20px; margin-right: 5px; margin-bottom: 3px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5L12 3l9 7.5" />
+              <path d="M5 9v11a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9" />
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </header>
+
+      <section class="pgrid">
+        <aside class="card pside rise" style="--d: 0.05s">
+          <div class="pr-art">
+            <img
+              class="robot small"
+              src="{% static 'images/robot.png' %}"
+              alt="BoxBrain robot assistant"
+            />
+          </div>
+
+          <div class="avatar big">{{ user.fname|first|upper }}</div>
+
+          <h2>{{ user.fname }} {{ user.lname }}</h2>
+          <p class="mut">{{ user.email }}</p>
+
+          <span class="badge">
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"
+                fill="currentColor"
+              />
+            </svg>
+            Free plan
+          </span>
+        </aside>
+
+        <div class="pmain">
+          <form class="card rise" method="post" action="{% url 'profile' %}" style="--d: 0.12s" data-toast="Changes saved">
+            {% csrf_token %}
+            <h3>Personal information</h3>
+            <p class="mut">Update how you appear in BoxBrain.</p>
+
+            <div class="two">
+              <div class="field">
+                <label for="n">First Name</label>
+
+                <div class="inp">
+                  <svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21a8 8 0 0 1 16 0" />
+                  </svg>
+
+                  <input
+                    id="n"
+                    name="fname"
+                    type="text"
+                    placeholder="Riya"
+                    required
+                    value="{{ user.fname }}"
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="u">Last Name</label>
+
+                <div class="inp">
+                  <svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21a8 8 0 0 1 16 0" />
+                  </svg>
+
+                  <input
+                    id="u"
+                    name="lname"
+                    type="text"
+                    placeholder="Sharma"
+                    required
+                    value="{{ user.lname }}"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="e">Email</label>
+
+              <div class="inp">
+                <svg
+                  class=""
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="3" />
+                  <path d="M3 7l9 6 9-6" />
+                </svg>
+
+                <input
+                  id="e"
+                  name="email"
+                  type="email"
+                  placeholder="riya@boxbrain.ai"
+                  required
+                  value="{{ user.email }}"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="bio">About you</label>
+              <textarea style="cursor: not-allowed;" class="ta" id="bio" rows="3" disabled>
+I am a BoxBrain user. Ready to chat and exploreing AI features of BoxBrain.</textarea
+              >
+            </div>
+
+            <div class="btns">
+              <button class="btn" type="submit">Update</button>
+              <button class="btn ghost" type="reset">Cancel</button>
+            </div>
+          </form>
+
+          <div class="card rise" style="--d: 0.2s">
+            <h3>Account</h3>
+
+            <div class="arow">
+              <div>
+                <b>Password</b>
+                <p class="mut">Choose a new password</p>
+              </div>
+
+              <a class="btn ghost sm" href="{% url 'reset_password' %}">Change</a>
+            </div>
+
+            <div class="arow">
+              <div>
+                <b>Email updates</b>
+                <p class="mut">Tips and product news</p>
+              </div>
+
+              <label class="sw">
+                <input type="checkbox" checked />
+                <span></span>
+              </label>
+            </div>
+
+            <div class="arow">
+              <div>
+                <b>Delete All Chats</b>
+                <p class="mut">Delete all your chats and conversations</p>
+              </div>
+
+              <button
+                type="submit"
+                class="clear"
+                id="clear"
+                data-confirm
+                data-title="Delete all chats?"
+                data-text="All your chats and conversations will be permanently deleted. This can't be undone."
+                data-name="All chats &amp; conversations"
+                data-ok="Delete all"
+              >
+                <span>Clear Chat</span>
+              </button>
+            </div>
+
+            <div class="arow">
+              <div>
+                <b>Log out</b>
+                <p class="mut">End your session</p>
+              </div>
+
+              <a class="btn ghost sm" href="{% url 'logout' %}">Log out</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <form id="clearForm" method="post" action="{% url 'delete_all_chats' %}" hidden>
+      {% csrf_token %}
+    </form>
+
+    <!-- =========================================================
+         CONFIRM POPUP (delete chat / delete all chats)
+         Text button ke data-attributes se aata hai:
+           data-title, data-text, data-name (highlighted), data-ok
+         Logic: js/confirm.js  |  Style: css/style.css (.mo)
+         ========================================================= -->
+    <div class="mo" id="confirmModal" aria-hidden="true">
+      <div class="mo-card" role="alertdialog" aria-modal="true" aria-labelledby="moTitle" aria-describedby="moText">
+        <div class="mo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" /></svg></div>
+        <h3 id="moTitle" data-mo-title>Are you sure?</h3>
+        <p id="moText" data-mo-text></p>
+        <div class="mo-name" data-mo-name><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z" /></svg><span data-mo-name-text></span></div>
+        <div class="mo-btns">
+          <button type="button" class="btn ghost" data-mo-cancel>Cancel</button>
+          <button type="button" class="btn danger" data-mo-ok>Delete</button>
+        </div>
+      </div>
+    </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'error' %}
+          {% include 'error-toast.html' with msg=message %}
+        {% endif %}
+        {% if message.tags == 'success' %}
+          {% include 'success-toast.html' with msg=message %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/confirm.js' %}"></script>
+    <script>
+      document.getElementById('clear').addEventListener('confirmed', () => {
+        document.getElementById('clearForm').submit();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; background-color:#f5f3ef; font-family:Arial, Helvetica, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f3ef; padding:30px 0;">
+    <tr>
+      <td align="center">
+        <table width="480" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:16px; padding:36px; max-width:480px;">
+          <tr>
+            <td align="center" style="font-size:24px; font-weight:bold; color:#0f1b3d; padding-bottom:6px;">
+              Box<span style="color:#ff7a1a;">Brain</span> AI
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="font-size:16px; color:#0f1b3d; padding:18px 0 6px;">
+              Hi {{ fname }}, {% if reset %}reset your password{% else %}please verify your email{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="font-size:14px; color:#6b7280; padding-bottom:22px;">
+              {% if reset %}Enter the code below on the verification page to reset your password.{% else %}Enter the code below on the verification page to complete your registration.{% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <div style="display:inline-block; background-color:#fff4ea; border:1px dashed #ff7a1a; border-radius:12px; padding:14px 28px; font-size:32px; font-weight:bold; letter-spacing:8px; color:#ff7a1a;">
+                {{ otp }}
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="font-size:12px; color:#9ca3af; padding-top:24px;">
+              Do not share this code with anyone. If you didn't request this, you can safely ignore this email.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

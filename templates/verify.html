@@ -1,0 +1,148 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Verify · BoxBrain AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/verify.css' %}" />
+  </head>
+  <body class="auth">
+    <main class="page auth-wrap">
+      <section class="panel">
+        <div class="rise">
+          <a class="logo" href="{% url 'verify_email' %}"
+            ><svg viewBox="0 0 48 48">
+              <polygon points="24,3 44,14 24,25 4,14" fill="#ff9a52" />
+              <polygon points="4,14 24,25 24,47 4,36" fill="#ff6a00" />
+              <polygon points="44,14 24,25 24,47 44,36" fill="#e85d00" /></svg
+            ><span>Box<b>Brain</b></span></a
+          >
+        </div>
+        <h2 class="rise" style="--d: 0.08s">{% if forgot %}Reset your password{% else %}Verify your email{% endif %}</h2>
+        <p class="sub rise" style="--d: 0.14s">
+          We sent a 6-digit code to <b>{{ email }}</b>. Enter it below to
+          confirm it’s you.
+        </p>
+        <form
+          id="otpForm"
+          class="rise"
+          style="--d: 0.2s"
+          method="post"
+          action="{% if forgot %}{% url 'forgot_verify' %}{% else %}{% url 'verify_email' %}{% endif %}"
+        >
+          {% csrf_token %}
+          <div class="otp" role="group" aria-label="6-digit verification code">
+            <input
+              class="otp-in"
+              name="digit1"
+              style="--i: 0"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="one-time-code"
+              aria-label="Digit 1"
+            /><input
+              class="otp-in"
+              name="digit2"
+              style="--i: 1"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="off"
+              aria-label="Digit 2"
+            /><input
+              class="otp-in"
+              name="digit3"
+              style="--i: 2"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="off"
+              aria-label="Digit 3"
+            /><input
+              class="otp-in"
+              name="digit4"
+              style="--i: 3"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="off"
+              aria-label="Digit 4"
+            /><input
+              class="otp-in"
+              name="digit5"
+              style="--i: 4"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="off"
+              aria-label="Digit 5"
+            /><input
+              class="otp-in"
+              name="digit6"
+              style="--i: 5"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              maxlength="1"
+              autocomplete="off"
+              aria-label="Digit 6"
+            />
+          </div>
+          <input type="hidden" name="otp" id="otpValue" />
+          <p class="otp-resend">
+            Didn’t get the code?
+            <button class="lnk" id="resend" {% if forgot %}type="submit" form="resendForm"{% else %}type="button"{% endif %}>Resend code</button>
+          </p>
+          <button class="btn" type="submit">Verify</button>
+        </form>
+        {% if forgot %}
+          <form id="resendForm" method="post" action="{% url 'forgot_resend' %}" hidden>
+            {% csrf_token %}
+          </form>
+        {% endif %}
+        <p class="foot rise" style="--d: 0.34s">
+          <a class="lnk" href="{% url 'login' %}">Back to log in</a>
+        </p>
+      </section>
+      <aside class="art">
+        <div class="rise" style="--d: 0.2s">
+          <img
+            class="robot small"
+            src="{% static 'images/robot.png' %}"
+            alt="BoxBrain robot assistant"
+          />
+        </div>
+        <h3>One last step.</h3>
+        <p>Enter the code to keep your account secure.</p>
+      </aside>
+    </main>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                {% include 'error-toast.html' with msg=message %}
+            {% endif %}
+
+            {% if message.tags == 'success' %}
+                {% include 'success-toast.html' with msg=message %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <script src="{% static 'js/verify.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,197 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Get started · BoxBrain AI</title>
+    <meta name="description" content="Start using BoxBrain AI in a few simple steps." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/get-started.css' %}" />
+  </head>
+  <body class="gs">
+    <header class="top rise">
+      <a class="logo" href="{% url 'get_started' %}">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <polygon points="24,3 44,14 24,25 4,14" fill="#ff9a52" />
+          <polygon points="4,14 24,25 24,47 4,36" fill="#ff6a00" />
+          <polygon points="44,14 24,25 24,47 44,36" fill="#e85d00" />
+        </svg>
+        <span>Box<b>Brain</b></span>
+      </a>
+      <nav class="gs-nav" aria-label="Page sections">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="acts">
+        <a class="gs-login" href="{% url 'login' %}">Log in</a>
+        <a class="btn sm gs-cta-sm" href="{% url 'register' %}">Sign up</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="gs-hero">
+        <div class="gs-copy">
+          <span class="badge rise" style="--d: 0.05s">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="currentColor" />
+            </svg>
+            Free to start
+          </span>
+          <h1 class="rise" style="--d: 0.12s">
+            Get started with <span>BoxBrain</span>
+          </h1>
+          <p class="gs-lead rise" style="--d: 0.2s">
+            Your AI chat assistant for ideas, code and everyday questions.
+            Create your account in under a minute and start chatting right away.
+          </p>
+          <div class="gs-actions rise" style="--d: 0.28s">
+            <a class="btn gs-primary" href="{% url 'register' %}">
+              Create free account
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="btn ghost gs-secondary" href="{% url 'login' %}">I already have an account</a>
+          </div>
+          <ul class="gs-trust rise" style="--d: 0.36s">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>No credit card</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>Email verification</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>Private chats</li>
+          </ul>
+        </div>
+
+        <div class="stage rise" style="--d: 0.15s">
+          <img class="robot" src="{% static 'images/robot.png' %}" alt="BoxBrain robot assistant" />
+          <div class="fc f1">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z" /></svg></i>
+            Get ideas
+          </div>
+          <div class="fc f2">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></svg></i>
+            <b>Explain code</b>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEPS -->
+      <section class="gs-sec" id="how">
+        <div class="gs-head">
+          <span class="gs-kicker">How it works</span>
+          <h2>Up and running in 4 steps</h2>
+          <p>No setup, no downloads. Just sign up and start asking.</p>
+        </div>
+        <ol class="gs-steps">
+          <li class="gs-step rise" style="--d: 0.05s">
+            <span class="num">1</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg></i>
+            <h3>Create your account</h3>
+            <p>Sign up with your name, email and a password.</p>
+            <a class="lnk" href="{% url 'register' %}">Sign up →</a>
+          </li>
+          <li class="gs-step rise" style="--d: 0.12s">
+            <span class="num">2</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="M3 7l9 6 9-6" /></svg></i>
+            <h3>Verify your email</h3>
+            <p>Enter the code we send you to confirm it's really you.</p>
+          </li>
+          <li class="gs-step rise" style="--d: 0.19s">
+            <span class="num">3</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z" /></svg></i>
+            <h3>Ask your first question</h3>
+            <p>Type a prompt or pick a quick suggestion to begin.</p>
+          </li>
+          <li class="gs-step rise" style="--d: 0.26s">
+            <span class="num">4</span>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M9 4v16" /></svg></i>
+            <h3>Pick up anytime</h3>
+            <p>Your chat history is saved, so you can continue later.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="gs-sec alt" id="features">
+        <div class="gs-head">
+          <span class="gs-kicker">What you can do</span>
+          <h2>One assistant, many uses</h2>
+          <p>Try one of these to get a feel for it, then ask your own.</p>
+        </div>
+        <div class="gs-grid">
+          <a class="gs-feat" href="{% url 'register' %}">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z" /></svg></i>
+            <h3>Get ideas</h3>
+            <p>Brainstorm names, plans, posts and projects.</p>
+            <q>Give me 5 startup ideas for students</q>
+          </a>
+          <a class="gs-feat" href="{% url 'register' %}">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></svg></i>
+            <h3>Explain code</h3>
+            <p>Understand snippets and fix bugs faster.</p>
+            <q>Explain what this JavaScript function does</q>
+          </a>
+          <a class="gs-feat" href="{% url 'register' %}">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></svg></i>
+            <h3>Summarize text</h3>
+            <p>Turn long articles into short, clear points.</p>
+            <q>Summarize this text in 3 bullet points</q>
+          </a>
+          <a class="gs-feat" href="{% url 'register' %}">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" /></svg></i>
+            <h3>Write &amp; improve</h3>
+            <p>Draft emails and polish your writing.</p>
+            <q>Rewrite this email to sound more polite</q>
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="gs-sec" id="faq">
+        <div class="gs-head">
+          <span class="gs-kicker">FAQ</span>
+          <h2>Quick answers</h2>
+        </div>
+        <div class="gs-faq">
+          <details>
+            <summary>Is BoxBrain free to use?</summary>
+            <p>Yes. You can create an account and start chatting without entering any payment details.</p>
+          </details>
+          <details>
+            <summary>Do I need to verify my email?</summary>
+            <p>Yes, we send a verification code to your email after sign up. It keeps your account secure.</p>
+          </details>
+          <details>
+            <summary>What if I forget my password?</summary>
+            <p>Use the <a class="lnk" href="{% url 'forgot_password' %}">Forgot password</a> link on the log in page and we will help you reset it.</p>
+          </details>
+          <details>
+            <summary>Will my chats be saved?</summary>
+            <p>Your conversations appear in the Chats sidebar, so you can come back to them anytime.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="gs-final">
+        <div class="gs-final-box">
+          <h2>Ready to meet BoxBrain?</h2>
+          <p>Join now and ask your first question in less than a minute.</p>
+          <a class="btn gs-final-btn" href="{% url 'register' %}">Get started free</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="gs-foot">
+      <span>© <span id="yr">2026</span> BoxBrain AI</span>
+      <span><a href="{% url 'login' %}">Log in</a> · <a href="{% url 'register' %}">Sign up</a> · <a href="{% url 'get_started' %}">Home</a></span>
+    </footer>
+
+    <script src="{% static 'js/get-started.js' %}"></script>
+  </body>
+</html>

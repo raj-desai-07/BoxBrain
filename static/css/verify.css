@@ -1,0 +1,167 @@
+/* verify / success / error pages (extends css/style.css) */
+.otp {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(6px, 1.8vw, 12px);
+    max-width: 430px;
+    margin: 4px 0 22px
+}
+
+.otp-in {
+    width: 100%;
+    aspect-ratio: 1/1.18;
+    min-width: 0;
+    text-align: center;
+    font-size: clamp(20px, 4vw, 26px);
+    font-weight: 600;
+    border: 1px solid #dedad3;
+    border-radius: 14px;
+    background: #fff;
+    caret-color: var(--or);
+    transition: border-color .2s, box-shadow .2s, background .2s, transform .2s;
+    animation: otpPop .55s cubic-bezier(.2, .9, .25, 1.1) both;
+    animation-delay: calc(var(--i)*.06s + .3s)
+}
+
+.otp-in:hover {
+    border-color: #cfcac2
+}
+
+.otp-in:focus {
+    outline: 0;
+    border-color: var(--or);
+    box-shadow: 0 0 0 4px rgba(255, 106, 0, .12);
+    transform: translateY(-2px)
+}
+
+.otp-in.filled {
+    background: var(--tint);
+    border-color: #f6c9a8
+}
+
+.otp.err .otp-in {
+    border-color: #e5334d;
+    background: #fff5f6;
+    box-shadow: 0 0 0 4px rgba(229, 51, 77, .08)
+}
+
+.otp.shake {
+    animation: otpShake .45s
+}
+
+.otp-resend {
+    font-size: 14px;
+    color: var(--mut);
+    margin: -4px 0 22px
+}
+
+.otp-resend .lnk {
+    font-size: 14px
+}
+
+.btn:disabled {
+    opacity: .8;
+    cursor: progress
+}
+
+.st-badge {
+    --c: #16a870;
+    --cbg: #e3f8ee;
+    position: relative;
+    width: 84px;
+    height: 84px;
+    margin-top: 40px;
+    border-radius: 50%;
+    background: var(--cbg);
+    color: var(--c);
+    display: grid;
+    place-items: center
+}
+
+.st-badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 35%, transparent);
+    animation: stRing 1.8s .5s ease-out infinite
+}
+
+.st-badge svg {
+    width: 40px;
+    height: 40px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round
+}
+
+.st-badge path {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: bbDraw .55s .35s ease forwards
+}
+
+.st-badge path+path {
+    animation-delay: .5s
+}
+
+.st-err {
+    --c: #e5334d;
+    --cbg: #fde8ec;
+    animation: otpShake .5s .6s
+}
+
+.st-badge+h2 {
+    margin-top: 26px
+}
+
+.st-actions {
+    margin-top: 26px
+}
+
+.foot .lnk {
+    font-size: inherit
+}
+
+@keyframes otpPop {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(.9)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes otpShake {
+
+    20%,
+    60% {
+        transform: translateX(-7px)
+    }
+
+    40%,
+    80% {
+        transform: translateX(7px)
+    }
+}
+
+@keyframes stRing {
+    to {
+        box-shadow: 0 0 0 22px transparent
+    }
+}
+
+@media(max-width:380px) {
+    .otp {
+        gap: 6px
+    }
+
+    .otp-in {
+        border-radius: 11px
+    }
+}

@@ -1,0 +1,170 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create account · BoxBrain AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="auth">
+    <main class="page auth-wrap">
+      <section class="panel">
+        <div class="rise">
+          <a class="logo" href="{% url 'register' %}"
+            ><svg viewBox="0 0 48 48">
+              <polygon points="24,3 44,14 24,25 4,14" fill="#ff9a52" />
+              <polygon points="4,14 24,25 24,47 4,36" fill="#ff6a00" />
+              <polygon points="44,14 24,25 24,47 44,36" fill="#e85d00" /></svg
+            ><span>Box<b>Brain</b></span></a
+          >
+        </div>
+        <h2 class="rise" style="--d: 0.08s">Create your account</h2>
+        <p class="sub rise" style="--d: 0.14s">
+          Start chatting with BoxBrain in less than a minute.
+        </p>
+        <form method="POST" class="rise" style="--d: 0.2s" action="{% url 'register' %}">
+          {% csrf_token %}
+          <div class="field">
+            <label for="name">First name</label>
+            <div class="inp">
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21a8 8 0 0 1 16 0" /></svg
+              ><input
+                id="name"
+                name="fnm"
+                type="text"
+                placeholder="Riya"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label for="name">Last name</label>
+            <div class="inp">
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21a8 8 0 0 1 16 0" /></svg
+              ><input
+                id="name"
+                name="lnm"
+                type="text"
+                placeholder="Sharma"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <div class="inp">
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="5" width="18" height="14" rx="3" />
+                <path d="M3 7l9 6 9-6" /></svg
+              ><input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label for="pw">Password</label>
+            <div class="inp">
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="5" y="11" width="14" height="10" rx="3" />
+                <path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg
+              ><input
+                id="pw"
+                name="password"
+                type="password"
+                placeholder="At least 8 characters"
+                required
+              /><button type="button" class="eye" aria-label="Show password">
+                <svg
+                  class=""
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button class="btn" type="submit">Create account</button>
+        </form>
+        <p class="foot rise" style="--d: 0.34s">
+          Already have an account? <a class="lnk" href="{% url 'login' %}">Log in</a>
+        </p>
+      </section>
+      <aside class="art">
+        <div class="rise" style="--d: 0.2s">
+          <img
+            class="robot small"
+            src="{% static 'images/robot.png' %}"
+            alt="BoxBrain robot assistant"
+          />
+        </div>
+        <h3>Your new thinking partner.</h3>
+        <p>Write, learn and build faster with an assistant that keeps up.</p>
+      </aside>
+    </main>
+    {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'error' %}
+              {% include 'error-toast.html' with msg=message %}
+          {% endif %}
+
+          {% if message.tags == 'success' %}
+              {% include 'success-toast.html' with msg=message %}
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
